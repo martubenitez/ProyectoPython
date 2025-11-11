@@ -1,0 +1,16 @@
+FloatLayout:
+    Background:
+        id: background
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "cielo.jpg"
+            Rectangle:
+                size: self.width, 150
+                pos: self.pos[0], self.pos[1] + self.height - 150
+                texture: self.nube_textura
+            Rectangle:
+                size: self.width, self.height
+                pos: self.pos[0], self.pos[1] 
+                texture: self.sopi_textura
