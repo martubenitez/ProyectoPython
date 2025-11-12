@@ -22,7 +22,7 @@ class Background(Widget):
 
     def scroll_textures(self, time_passed):
         #actualizar uvpos
-        self.nube_textura.uvpos = ((self.nube_textura.uvpos[0] + time_passed/2.0)%Window.width, self.nube_textura.uvpos[1])
+        self.nube_textura.uvpos = ((self.nube_textura.uvpos[0] + time_passed/3.0)%Window.width, self.nube_textura.uvpos[1])
         self.sopi_textura.uvpos = ((self.sopi_textura.uvpos[0] + time_passed/2.0)%Window.width, self.sopi_textura.uvpos[1])
         #redibujar textura
         texture = self.property("nube_textura")
