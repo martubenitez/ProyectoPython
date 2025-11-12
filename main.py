@@ -37,12 +37,30 @@ class Background(Widget):
 
     pass
 
-
+from random import randint
 
 class MainApp(App):
+    tubos = []
+
     def on_start(self):
         Clock.schedule_interval(self.root.ids.background.scroll_textures, 1/60)
 
+    def start_game (self):
+        #crear tubos
+        num_tubos = 5
+        distancia_entre_tubos = Window.width / (num_tubos - 1)
+        for i in range(num_tubos):
+            tubo = Tubo()
+            tubo.tubo_center = randint(100 + 100, self.root.height - 100)
+            tubo.size_hint = (None, None)
+            tubo.pos = (i*distancia_entre_tubos, 100)
+            tubo.size = (70, self.root.height - 100)
+
+            self.tubos.append(tubo)
+            self.root.add_widget(tubo)
+
+
+        #mover tubos
     pass
 
 if __name__ == "__main__":

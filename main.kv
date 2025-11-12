@@ -16,15 +16,9 @@ FloatLayout:
                 size: self.width, 100
                 pos: self.pos[0], self.pos[1] 
                 texture: self.sopi_textura
-    Tubo:
+    Button:
+        text: "JUGAR"
         size_hint: None, None
-        size: 70, root.height - 100
-        pos: 200, 100
-        tubo_center: 300
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, 0.5
-            Rectangle:
-                size: self.size
-                pos: self.pos
+        on_release:
+            app.start_game()
 
