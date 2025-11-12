@@ -3,6 +3,9 @@ from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 from kivy.core.window import Window
+from kivy.clock import Clock
+
+from tubo import Tubo
 
 class Background(Widget):
     nube_textura = ObjectProperty(None)
@@ -32,11 +35,9 @@ class Background(Widget):
         texture = self.property("sopi_textura")
         texture.dispatch(self)
 
-
-
     pass
 
-from kivy.clock import Clock
+
 
 class MainApp(App):
     def on_start(self):
