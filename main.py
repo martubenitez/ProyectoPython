@@ -1,3 +1,5 @@
+# Autores: Manuel Moran y Martina Belen Benitez
+
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
@@ -105,7 +107,7 @@ class MainApp(App):
         self.root.ids.score.text = "0"
         self.was_colliding = False
         self.tubos = []
-        max_diferencia_espacios = 200
+        max_diferencia_espacios = 100
         self.frames = Clock.schedule_interval(self.next_frame, 1/60.)
         # Crear tubos
         num_tubos = 5
