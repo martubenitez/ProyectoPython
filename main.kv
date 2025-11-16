@@ -11,14 +11,29 @@ FloatLayout:
             Rectangle: #nubes
                 size: self.width, 150
                 pos: self.pos[0], self.pos[1] + self.height - 150
-                texture: self.nube_textura
+                texture: self.textura_nube
             Rectangle: #piso
                 size: self.width, 100
                 pos: self.pos[0], self.pos[1] 
-                texture: self.sopi_textura
+                texture: self.textura_sopi
+    Label:
+        id: score
+        size_hint_y: None
+        height: 100
+        text: "0"
+        font_size: 40
     Button:
         text: "JUGAR"
-        size_hint: None, None
+        background_normal: "transparent.png"
+        background_down: "transparent.png"
+        id: start_button
         on_release:
+            self.disabled = True
+            self.opacity = 0
             app.start_game()
-
+    Bird:
+        source: "bird1.png"
+        size_hint: None, None
+        size: 46, 34
+        pos: 20, (root.height - 100) / 2.0
+        id: bird

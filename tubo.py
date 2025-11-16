@@ -1,10 +1,11 @@
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ObjectProperty, ListProperty
 from kivy.uix.image import Image
+from kivy.clock import Clock
 
 class Tubo(Widget):
     #atributos numericos
-    GAP_SIZE = NumericProperty(60)
+    GAP_SIZE = NumericProperty(100)
     CAP_SIZE = NumericProperty(20)
     tubo_center = NumericProperty(0)
     bottom_body_position = NumericProperty(0)
@@ -14,7 +15,7 @@ class Tubo(Widget):
 
     # textura
     tubo_body_texture = ObjectProperty(None)
-    bottom_tubo_tex_coords = ListProperty((0 ,0, 1, 0, 1, 1, 0, 1))
+    lower_tubo_tex_coords = ListProperty((0 ,0, 1, 0, 1, 1, 0, 1))
     top_tubo_tex_coords = ListProperty((0 ,0, 1, 0, 1, 1, 0, 1))
 
     
@@ -24,14 +25,16 @@ class Tubo(Widget):
         self.tubo_body_texture.wrap = 'repeat'
 
     def on_size(self, *args):
-        bottom_body_size = self.bottom_cap_position - self.bottom_body_position
+        lower_body_size = self.bottom_cap_position - self.bottom_body_position
 
-        self.bottom_tubo_tex_coords[5] = bottom_body_size/20.
-        self.bottom_tubo_tex_coords[7] = bottom_body_size/20.
+        self.lower_tubo_tex_coords[5] = lower_body_size/20.
+        self.lower_tubo_tex_coords[7] = lower_body_size/20.
 
         top_body_size = self.top - self.top_body_position
 
-        self.top_tubo_tex_coords[5] = bottom_body_size/20.
-        self.top_tubo_tex_coords[7] = bottom_body_size/20.
+        self.top_tubo_tex_coords[5] = top_body_size/20.
+        self.top_tubo_tex_coords[7] = top_body_size/20.
 
+    def on_pipe_center(self, *args):
+        Clock.schedule_once(self.on_size, 0)
         
