@@ -6,7 +6,7 @@ from kivy.metrics import dp
 
 class Tubo(Widget):
     #atributos numericos
-    GAP_SIZE = NumericProperty(dp(100))
+    GAP_SIZE = NumericProperty(dp(150))
     CAP_SIZE = NumericProperty(dp(20))
     tubo_center = NumericProperty(0)
     bottom_body_position = NumericProperty(0)
