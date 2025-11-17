@@ -6,7 +6,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.clock import Clock
-
+from kivy.metrics import dp
 from tubo import Tubo
 
 class Background(Widget):
@@ -19,7 +19,7 @@ class Background(Widget):
         #crear texturas
         self.textura_nube = Image(source="nube.png").texture
         self.textura_nube.wrap = 'repeat'
-        self.textura_nube.uvsize = (Window.width / 250, -1)
+        self.textura_nube.uvsize = (Window.width / dp(250), -1)
 
         self.textura_sopi = Image(source="sopi.png").texture
         self.textura_sopi.wrap = 'repeat'
@@ -47,7 +47,7 @@ class Bird(Image):
 
     def on_touch_down(self, touch):
         self.source = "bird2.png"
-        self.velocity = 150
+        self.velocity = dp(150)
         super().on_touch_down(touch)
 
     def on_touch_up(self, touch):
@@ -57,7 +57,7 @@ class Bird(Image):
 
 class MainApp(App):
     tubos = []
-    GRAVITY = 300
+    GRAVITY = dp(300)
     was_colliding = False
 
     # def on_start(self):
@@ -81,7 +81,7 @@ class MainApp(App):
                     self.game_over()
                 if bird.top > (tubo.tubo_center + tubo.GAP_SIZE/2.0):
                     self.game_over()
-        if bird.y < 100:
+        if bird.y < dp(100):
             self.game_over()
         if bird.top > Window.height:
             self.game_over()
@@ -91,7 +91,7 @@ class MainApp(App):
         self.was_colliding = is_colliding
 
     def game_over(self):
-        self.root.ids.bird.pos = (20, (self.root.height - 100) / 2.0)
+        self.root.ids.bird.pos = (dp(20), (self.root.height - dp(100)) / 2.0)
         for tubo in self.tubos:
             self.root.remove_widget(tubo)
         self.frames.cancel()
@@ -107,23 +107,25 @@ class MainApp(App):
         self.root.ids.score.text = "0"
         self.was_colliding = False
         self.tubos = []
-        max_diferencia_espacios = 100
+        max_diferencia_espacios = dp(100)
         self.frames = Clock.schedule_interval(self.next_frame, 1/60.)
         # Crear tubos
         num_tubos = 5
         distancia_entre_tubos = Window.width / (num_tubos - 1)
-        centro_anterior_tubo = randint(100 + 100, self.root.height - 100)
+        margen = dp(100)
+        centro_anterior_tubo = randint(margen*2, self.root.height - margen)
         for i in range(num_tubos):
             tubo = Tubo()
-            if centro_anterior_tubo > 199 + max_diferencia_espacios and centro_anterior_tubo < Window.height - (99 + max_diferencia_espacios):
+            if centro_anterior_tubo > margen*2 -1 + max_diferencia_espacios and centro_anterior_tubo < Window.height - (margen -1 + max_diferencia_espacios):
                 tubo.tubo_center = randint(centro_anterior_tubo - max_diferencia_espacios, centro_anterior_tubo + max_diferencia_espacios)
-            if centro_anterior_tubo < 200 + max_diferencia_espacios:
-                tubo.tubo_center = randint(centro_anterior_tubo - (centro_anterior_tubo - 200), centro_anterior_tubo + max_diferencia_espacios)
-            if centro_anterior_tubo > Window.height - (100 + max_diferencia_espacios):
+            if centro_anterior_tubo < margen*2 + max_diferencia_espacios:
+                tubo.tubo_center = randint(centro_anterior_tubo - (centro_anterior_tubo - margen*2), centro_anterior_tubo + max_diferencia_espacios)
+            if centro_anterior_tubo > Window.height - (margen + max_diferencia_espacios):
                 tubo.tubo_center = randint(centro_anterior_tubo - max_diferencia_espacios, centro_anterior_tubo + (Window.height - 100 - centro_anterior_tubo))
+            
             tubo.size_hint = (None, None)
-            tubo.pos = (Window.width + i*distancia_entre_tubos, 100)
-            tubo.size = (70, self.root.height - 100)
+            tubo.pos = (Window.width + i*distancia_entre_tubos, margen)
+            tubo.size = (dp(70), self.root.height - margen)
             centro_anterior_tubo = tubo.tubo_center
 
             self.tubos.append(tubo)
@@ -131,7 +133,7 @@ class MainApp(App):
 
     def mover_tubos(self, time_passed):
         for tubo in self.tubos:
-            tubo.x -= time_passed * 100
+            tubo.x -= time_passed * dp(100)
 
         # Chequeo si tengo que reposicionar el tubo al lado derecho
         num_tubos = 5

@@ -1,4 +1,5 @@
 #:include tubo.kv
+#:import dp kivy.metrics.dp
 
 FloatLayout:
     Background:
@@ -9,19 +10,19 @@ FloatLayout:
                 pos: self.pos
                 source: "cielo.png"
             Rectangle: #nubes
-                size: self.width, 150
-                pos: self.pos[0], self.pos[1] + self.height - 150
+                size: self.width, dp(150)
+                pos: self.pos[0], self.pos[1] + self.height - dp(150)
                 texture: self.textura_nube
             Rectangle: #piso
-                size: self.width, 100
+                size: self.width, dp(100)
                 pos: self.pos[0], self.pos[1] 
                 texture: self.textura_sopi
     Label:
         id: score
         size_hint_y: None
-        height: 100
+        height: dp(100)
         text: "0"
-        font_size: 40
+        font_size: sp(40)
     Button:
         text: "JUGAR"
         background_normal: "transparent.png"
@@ -34,6 +35,6 @@ FloatLayout:
     Bird:
         source: "bird1.png"
         size_hint: None, None
-        size: 46, 34
-        pos: 20, (root.height - 100) / 2.0
+        size: dp(46), dp(34)
+        pos: dp(20), (root.height - dp(100)) / 2.0
         id: bird
