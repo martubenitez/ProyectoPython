@@ -47,7 +47,7 @@ class Bird(Image):
 
     def on_touch_down(self, touch):
         self.source = "bird2.png"
-        self.velocity = dp(150)
+        self.velocity = dp(130)
         super().on_touch_down(touch)
 
     def on_touch_up(self, touch):
@@ -111,7 +111,7 @@ class MainApp(App):
         self.frames = Clock.schedule_interval(self.next_frame, 1/60.)
         # Crear tubos
         num_tubos = 5
-        distancia_entre_tubos = Window.width / (num_tubos - 1)
+        distancia_entre_tubos = Window.width / (num_tubos - 4)
         margen = dp(100)
         centro_anterior_tubo = randint(margen*2, self.root.height - margen)
         for i in range(num_tubos):
@@ -137,7 +137,7 @@ class MainApp(App):
 
         # Chequeo si tengo que reposicionar el tubo al lado derecho
         num_tubos = 5
-        distancia_entre_tubos = Window.width / (num_tubos - 1)
+        distancia_entre_tubos = Window.width / (num_tubos - 4)
         tubo_xs = list(map(lambda tubo: tubo.x, self.tubos))
         ultimo_tubo_x = max(tubo_xs)
         if ultimo_tubo_x <= Window.width - distancia_entre_tubos:
