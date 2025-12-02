@@ -2,12 +2,11 @@ from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ObjectProperty, ListProperty
 from kivy.uix.image import Image
 from kivy.clock import Clock
-from kivy.metrics import dp
 
 class Tubo(Widget):
     #atributos numericos
-    GAP_SIZE = NumericProperty(dp(150))
-    CAP_SIZE = NumericProperty(dp(20))
+    GAP_SIZE = NumericProperty(100)
+    CAP_SIZE = NumericProperty(20)
     tubo_center = NumericProperty(0)
     bottom_body_position = NumericProperty(0)
     bottom_cap_position = NumericProperty(0)
@@ -38,4 +37,3 @@ class Tubo(Widget):
 
     def on_pipe_center(self, *args):
         Clock.schedule_once(self.on_size, 0)
-        

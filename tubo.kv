@@ -1,5 +1,3 @@
-#:import dp kivy.metrics.dp
-
 <Tubo>:
     bottom_body_position: self.pos[1]
     bottom_cap_position: self.tubo_center - self.GAP_SIZE/2.0 - self.CAP_SIZE
@@ -9,25 +7,24 @@
     canvas.before:
         Rectangle:
             #tubo inferior
-            size: dp(50), self.bottom_cap_position - self.bottom_body_position
-            pos: self.pos[0] + dp(10), self.bottom_body_position
+            size: 50, self.bottom_cap_position - self.bottom_body_position
+            pos: self.pos[0] + 10, self.bottom_body_position
             texture: self.tubo_body_texture
             tex_coords: self.lower_tubo_tex_coords
         Rectangle:
         #tapa tubo inferior
-            size: dp(70), self.CAP_SIZE
+            size: 70, self.CAP_SIZE
             pos: self.pos[0], self.bottom_cap_position
             source: "base_70x10.png"
 
         Rectangle
         #tapa tubo superior
-            size: dp(70), self.CAP_SIZE
+            size: 70, self.CAP_SIZE
             pos: self.pos[0], self.top_cap_position
             source: "base_70x10.png"
         Rectangle:
         #cuerpo tubo superior
-            size: dp(50), self.top - self.top_body_position
-            pos: self.pos[0] + dp(10), self.top_body_position
+            size: 50, self.top - self.top_body_position
+            pos: self.pos[0] + 10, self.top_body_position
             texture: self.tubo_body_texture
             tex_coords: self.top_tubo_tex_coords
-
